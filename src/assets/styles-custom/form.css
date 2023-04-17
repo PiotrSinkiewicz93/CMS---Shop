@@ -1,0 +1,403 @@
+/*================
+  GLOBAL STYLES FORMS
+
+  1. INPUTS
+  2. LABELS
+  3. BUTTONS
+  4. OTHERS
+
+  AUTHOR: MARCIN PIERZYNOWSKI
+  ================*/
+
+/*==========================
+  1. INPUTS
+===========================*/
+
+/*
+* Global Input
+*/
+input:disabled {
+    border-color: #dfe3e9 !important;
+    background-color: #e6eaee !important;
+    color: rgba(53,64,82,.5) !important;
+    cursor: not-allowed !important;
+}
+
+/*
+* Basic Input
+*/
+input[basic-form] {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 8px 35px 8px 10px;
+    transition: all .3s;
+    border: 1px solid #dfe3e9;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #354052;
+    font-size: .875rem;
+    font-weight: 400;
+    resize: none;
+    height: 40px;
+}
+
+input[reverse] {
+    padding: 8px 10px 8px 40px;
+}
+
+input[basic-form]:focus {
+    border-color: #2ea1f8;
+    outline: none;
+}
+
+input[basic-form]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #cccfd4;
+}
+
+input[basic-form]::-moz-placeholder { /* Firefox 19+ */
+    color: #cccfd4;
+}
+
+input[basic-form]:-moz-placeholder { /* Firefox 18- */
+    color: #d4ccd1;
+}
+
+input[basic-form]:focus::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    opacity: 0.5;
+}
+
+input[basic-form]:focus::-moz-placeholder { /* Firefox 19+ */
+    opacity: 0.5;
+}
+
+input[basic-form]:focus:-moz-placeholder { /* Firefox 18- */
+    opacity: 0.5;
+}
+
+/*
+* Valid Error
+*/
+input[valid-input].ng-invalid.ng-touched {
+    border-color: #ed1c24;
+    color: #ed1c24;
+}
+
+input[valid-input].ng-invalid.ng-touched::-webkit-input-placeholder {
+    color: #ed1c24;
+}
+
+input[valid-input].ng-invalid.ng-touched::-moz-placeholder {
+    color: #ed1c24;
+}
+
+input[valid-input].ng-invalid.ng-touched:-moz-placeholder {
+    color: #ed1c24;
+}
+
+/*
+* Valid Warning
+*/
+
+input[valid-warning-input].ng-invalid.ng-touched {
+    border-color: #fd9a18;
+    color: #354052;
+}
+
+input[valid-warning-input].ng-invalid.ng-touched::-webkit-input-placeholder {
+    color: #fd9a18;
+}
+
+input[valid-warning-input].ng-invalid.ng-touched::-moz-placeholder {
+    color: #fd9a18;
+}
+
+input[valid-warning-input].ng-invalid.ng-touched:-moz-placeholder {
+    color: #fd9a18;
+}
+
+/*
+* Valid Success
+*/
+
+input[valid-input].ng-valid.ng-touched,
+input[valid-warning-input].ng-valid.ng-touched {
+    border-color: #1bb934;
+    color: #354052;
+}
+
+input[valid-input].ng-valid.ng-touched::-webkit-input-placeholder,
+input[valid-warning-input].ng-valid.ng-touched::-webkit-input-placeholder {
+    color: #1bb934;
+}
+
+input[valid-input].ng-valid.ng-touched::-moz-placeholder,
+input[valid-warning-input].ng-valid.ng-touched::-moz-placeholder {
+    color: #1bb934;
+}
+
+input[valid-input].ng-valid.ng-touched:-moz-placeholder,
+input[valid-warning-input].ng-valid.ng-touched:-moz-placeholder {
+    color: #1bb934;
+}
+
+/*==========================
+  2. LABELS
+===========================*/
+
+/*
+* Basic Label
+*/
+label[basic-form] {
+    position: relative;
+    display: block;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    margin: 0 0 5px 10px; 
+    color: #7f8fa4;
+    font-size: .875rem;
+    font-weight: 400;
+}
+
+label[basic-form] span[icon-form] {
+    position: absolute;
+    top: 26px;
+    font-size: 18px;
+    right: 0px;
+    height: 40px;
+    display: flex;
+    width: 35px;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg,#fff,#f2f4f7);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: 1px solid #dfe3e9;
+}
+
+label[basic-form] span[reverse] {
+    left: -10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+label[basic-form] span[icon-form]:hover {
+    cursor: pointer;
+}
+
+label[basic-form] i[valid="error"] {
+    color: #ed1c24 !important;
+    display: none;
+}
+
+label[basic-form] i[valid="warning"] {
+    color: #fd9a18 !important;
+    display: none;
+}
+
+label[basic-form] i[valid="success"] {
+    color: #1bb934 !important;
+    display: none;
+}
+
+/*===================================
+    3.BUTTONS
+===================================*/
+
+/*
+* Global
+*/
+button[info-form],
+button[secondary-form], 
+button[primary-form],
+button[danger-form],
+button[warning-form],
+button[fancy-form] {
+    transition: all .15s ease-in-out;
+    border: 1px solid;
+    border-radius: 4px;
+    margin: 0;
+    padding: .5rem 1.25rem;
+    font-size: .875rem;
+    font-weight: 400;
+}
+
+button[info-form]:hover,
+button[secondary-form]:hover,
+button[primary-form]:hover,
+button[danger-form]:hover,
+button[warning-form]:hover,
+button[fancy-form]:hover {
+    cursor: pointer;
+}
+
+button[info-form]:focus,
+button[secondary-form]:focus,
+button[primary-form]:focus,
+button[danger-form]:focus,
+button[warning-form]:focus,
+button[fancy-form]:focus {
+    outline: 0;
+}
+
+/*
+* Info
+*/
+button[info-form] {
+    background: linear-gradient(180deg,#1a98f7,#1485db);
+    border-color: #1a91eb;
+    color: #fff;
+}
+
+button[info-form]:hover {
+    background: linear-gradient(180deg,#1a98f7,#0e79ca);
+}
+
+/*
+* Secondary
+*/
+button[secondary-form] {
+    background: linear-gradient(180deg,#fff,#f2f4f7);
+    border-color: #dfe3e9;
+    color: #354052;
+}
+
+button[secondary-form]:hover {
+    background: linear-gradient(180deg,#fcfcfc,#eceff3);
+}
+
+/*
+* Primary
+*/
+button[primary-form] {
+    background: linear-gradient(180deg,#475364,#273142);
+    color: #fff;
+    border-color: #354052;
+}
+
+button[primary-form]:hover {
+    background: linear-gradient(180deg,#3f4958,#151b24);
+    border-color: #354052;
+}
+
+/*
+* Danger
+*/
+button[danger-form] {
+    background: linear-gradient(180deg,#f95359,#d35847);
+    color: #fff;
+    border-color: #d35847;
+}
+
+button[danger-form]:hover {
+    background: linear-gradient(180deg,#f83f46,#cf4937);
+}
+
+/*
+* Warning
+*/
+button[warning-form] {
+    background: linear-gradient(180deg,#fd9a18,#f16911);
+    color: #fff;
+    border-color: #f16911;
+}
+
+button[warning-form]:hover {
+    background: linear-gradient(180deg,#fd9104,#e0600d);
+}
+
+/*
+* Fancy
+*/
+button[fancy-form] {
+    background: linear-gradient(180deg,#886ce6,#7d5be2);
+    color: #fff;
+    border-color: #7d5be2;
+}
+
+button[fancy-form]:hover {
+    background: linear-gradient(180deg,#7a5be3,#6f4adf)
+}
+
+/*===================================
+    4. TEXTAREA
+===================================*/
+textarea[basic-form] {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: .59375rem .9375rem;
+    transition: all .3s;
+    border: 1px solid #dfe3e9;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #354052;
+    font-size: .875rem;
+    font-weight: 400;
+    resize: none;
+}
+
+/*
+* Valid Error
+*/
+textarea[valid-textarea].ng-invalid.ng-touched {
+    border-color: #ed1c24;
+    color: #ed1c24;
+}
+
+textarea[valid-textarea].ng-invalid.ng-touched::-webkit-input-placeholder {
+    color: #ed1c24;
+}
+
+textarea[valid-textarea].ng-invalid.ng-touched::-moz-placeholder {
+    color: #ed1c24;
+}
+
+textarea[valid-textarea].ng-invalid.ng-touched:-moz-placeholder {
+    color: #ed1c24;
+}
+
+/*
+* Valid Success
+*/
+
+textarea[valid-textarea].ng-valid.ng-touched {
+    border-color: #1bb934;
+    color: #354052;
+}
+
+textarea[valid-textarea].ng-valid.ng-touched::-webkit-input-placeholder {
+    color: #1bb934;
+}
+
+textarea[valid-textarea].ng-valid.ng-touched::-moz-placeholder {
+    color: #1bb934;
+}
+
+textarea[valid-textarea].ng-valid.ng-touched:-moz-placeholder {
+    color: #1bb934;
+}
+
+
+/*===================================
+    5.OTHER
+===================================*/
+
+/*
+* Basic Small Text
+*/
+span[small-text-form] {
+    font-size: 11px;
+}
+
+/*
+* Text Form Danger
+*/
+p[text-form-danger] {
+    font-size: 12px;
+    color: #ed1c24 !important;
+    margin-left: 5px;
+    margin: 0;
+}

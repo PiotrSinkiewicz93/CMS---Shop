@@ -1,0 +1,180 @@
+/*================
+  GLOBAL STYLES
+
+  1. CARD SETTINGS
+  2. BASIC DATA SETTINGS
+  3. PASSWORD SETTINGS
+
+  AUTHOR: MARCIN PIERZYNOWSKI
+  ================*/
+/*==================
+  1. CARD SETTINGS
+==================*/
+
+main {
+  margin: 20px 3%;
+}
+
+ul {
+  display: flex;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background-color: transparent;
+}
+
+li {
+  list-style: none;
+  padding: 20px 35px;
+  border-bottom-color: #fff;
+  background: #fff;
+  font-size: 16px;
+  border: 1px solid #dfe3e9;
+  border-bottom: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  color: #2d3848;
+  font-weight: 500;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+li.not-active {
+  display: inline-block;
+  align-self: flex-end;
+  margin-right: 4px;
+  padding: 15px 30px;
+  border: 1px solid #dfe3e9;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-size: 14px;
+  background: #fff;
+  background: linear-gradient(180deg,#fff,#f4f7fa);
+}
+
+.card {
+  margin: 0;
+  padding: 20px 30px;
+  border: 1px solid #dfe3e9;
+  border-top: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: #fff;
+  color: #354052;
+  min-height: 1px;
+}
+
+/*====================
+  2. BASIC DATA SETTINGS
+=====================*/
+
+.profile-settings  {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.avatar {
+  padding: 0 15px;
+  text-align: center;
+}
+
+.avatar img {
+  height: 110px;
+  width: 110px;
+  border-radius: 50%;
+}
+
+.avatar > a {
+  display: block;
+  color: #354052;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.avatar a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.basic-info form > div,
+.additional-info form > div {
+  margin: 20px 10px 20px 10px;
+}
+
+.fb-profile {
+  background: #2492e4 !important;
+  border-color: #2492e4 !important;
+  color: #fff !important;
+}
+
+.tw-profile {
+  border-color: #0af!important;
+  background: #0af!important;
+  color: #fff !important;
+}
+
+.ln-profile {
+  background: #0271ae !important;
+  border: #0271ae !important;
+  color: #fff;
+}
+
+.submit-profile {
+  padding: 0 20px;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.submit-profile button:nth-child(2) {
+ margin-top: 10px;
+}
+
+.submit-profile button i {
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 576px) {
+  .submit-profile {
+    display: block;
+  }
+  
+  .submit-profile button:nth-child(2) {
+   margin-left: 20px;
+   margin-top: 0px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .profile-settings {
+    grid-template-columns: 25% repeat(2, 1fr);
+  }
+}
+
+/*====================
+  3. PASSWORD SETTINGS
+=====================*/
+
+.password-settings {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.password-settings .old-password,
+.password-settings form > div {
+  margin: 20px 10px;
+}
+
+.password-input {
+  background: unset !important;
+  border: unset !important;
+}
+
+@media screen and (min-width: 992px) {
+  .password-settings {
+    grid-template-columns: 25% repeat(2, 1fr);
+  }
+}

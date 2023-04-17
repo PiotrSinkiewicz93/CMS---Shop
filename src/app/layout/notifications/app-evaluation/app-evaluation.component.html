@@ -1,0 +1,127 @@
+<div>
+  <section class="title-section-global">Oceny Produktów</section>
+
+  <!-- Eval -->
+  <main *ngIf="evaluations && evaluations.length > 0" class="list-eval">
+    <!-- Card Eval -->
+    <section class="card-eval">
+      <!-- List Eval -->
+      <section>
+        <!-- Nav List -->
+        <nav class="desc-list">
+          <h5>Oceny</h5>
+          <span (click)="showAll()">Pokaż Wszystkie</span>
+        </nav>
+
+        <table>
+          <!-- Header List -->
+          <thead>
+            <tr [formGroup]="filter" class="list-header">
+              <!-- Number List -->
+              <th [style.padding-left]="'30px'">No.</th>
+
+              <!-- Filter Email -->
+              <th>
+                <input
+                  basic-form
+                  placeholder="E-mail"
+                  formControlName="email"
+                  (input)="filterData()"
+                />
+              </th>
+
+              <!-- Filter Ref Products -->
+              <th>
+                <input
+                  basic-form
+                  placeholder="Numer referencyjny"
+                  formControlName="ref"
+                  (input)="filterData()"
+                />
+              </th>
+
+              <!-- Filter Date -->
+              <th>
+                <input
+                  basic-form
+                  placeholder="Data"
+                  formControlName="date"
+                  (input)="filterData()"
+                />
+              </th>
+
+              <!-- Eval -->
+              <th>Ocena</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              class="list-body"
+              *ngFor="
+                let evaluation of cpEvaluations.slice(0, limit);
+                let i = index
+              "
+            >
+              <!-- No -->
+              <th>
+                <p>{{ i + 1 }}</p>
+              </th>
+
+              <!-- Customer -->
+              <th>
+                <div class="basic-info">
+                  <div>
+                    <img [src]="evaluation.urlCustomer" />
+                  </div>
+                  <p>{{ evaluation.email }}</p>
+                </div>
+              </th>
+
+              <!-- Product -->
+              <th>
+                <div class="basic-info">
+                  <div>
+                    <img [src]="evaluation.urlProduct" />
+                  </div>
+                  <p>{{ evaluation.ref }}</p>
+                </div>
+              </th>
+
+              <!-- Date -->
+              <th>
+                <p class="date">
+                  {{ evaluation.date }}
+                </p>
+              </th>
+
+              <!-- Eval -->
+              <th *ngIf="stars">
+                <span class="star-eval" *ngFor="let star of stars[i]">
+                  <i [class]="star" [style.color]="'#fd9a18'"></i>
+                </span>
+              </th>
+            </tr>
+          </tbody>
+
+          <!-- Next Five Eval -->
+          <div
+            class="title-section-global"
+            [style.margin-bottom]="'25px'"
+            *ngIf="cpEvaluations.length > limit"
+          >
+            <button class="show-more-global" (click)="setLimit()">
+              <i class="fas fa-arrow-down"></i>
+            </button>
+          </div>
+        </table>
+      </section>
+    </section>
+  </main>
+
+  <!-- Empty List Eval -->
+  <section *ngIf="evaluations && evaluations.length === 0" class="empty-list">
+    <i class="fas fa-star-half-alt"></i>
+    <h4 [style.margin-top]="'10px'">Brak Ocen</h4>
+  </section>
+</div>

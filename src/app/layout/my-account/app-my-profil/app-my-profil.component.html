@@ -1,0 +1,396 @@
+<div>
+  <section class="title-section-global">Przegląd profilu</section>
+
+  <!-- Cards -->
+  <section class="cards">
+    <!-- Profile -->
+    <div class="my-profile">
+      <!-- Basic Data -->
+      <div class="basic-data">
+        <div class="profile-image">
+          <img [src]="user.detail.imageUrl" />
+        </div>
+        <p class="user-name">
+          {{
+            user.detail.name && user.detail.surname
+              ? user.detail.name + " " + user.detail.surname
+              : ""
+          }}
+        </p>
+        <p class="user-role">Administator strony sklepu</p>
+        <p class="user-location">
+          {{
+            user.detail.city && user.detail.country
+              ? user.detail.country + ", " + user.detail.city
+              : ""
+          }}
+        </p>
+      </div>
+
+      <!-- Options Profile -->
+      <div class="options-profile">
+        <a routerLink="/my-settings"> Edytuj Profil </a>
+        <a (click)="scrollToHistory(history)"> Przegląd Historii </a>
+      </div>
+
+      <!-- Statistic Profile -->
+      <div>
+        <table class="statistic-profile">
+          <thead>
+            <tr>
+              <th>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </th>
+              <th>
+                <p>{{ user.logins?.length }}</p>
+              </th>
+              <th>
+                <p>
+                  {{ user.addProducts?.length ? user.addProducts.length : 0 }}
+                </p>
+              </th>
+              <th>
+                <p>15</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                <p>Ranking</p>
+              </th>
+              <th>
+                <p>Logowań</p>
+              </th>
+              <th>
+                <p>Produktów</p>
+              </th>
+              <th>
+                <p>Zamówień</p>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Social Media -->
+      <div *ngIf="user.media" class="media-profile">
+        <p>
+          <i class="fas fa-share-alt"></i>
+          Media społecznościowe
+        </p>
+        <div class="media-detail">
+          <!-- Facebook -->
+          <div data="media" *ngIf="user.media.facebook">
+            <div class="media-contain">
+              <i data="facebook" class="fab fa-facebook-f"></i>
+            </div>
+            <div class="media-desc">
+              <p>Facebook</p>
+              <a target="_blank" [href]="user.media.facebook">{{
+                user.media.facebook
+              }}</a>
+            </div>
+          </div>
+
+          <!-- Twitter -->
+          <div data="media" *ngIf="user.media.twitter">
+            <div class="media-contain">
+              <i data="twitter" class="fab fa-twitter"></i>
+            </div>
+            <div class="media-desc">
+              <p>Twitter</p>
+              <a target="_blank" [href]="user.media.twitter">{{
+                user.media.twitter
+              }}</a>
+            </div>
+          </div>
+
+          <!-- LinkedIn -->
+          <div data="media" *ngIf="user.media.linkedIn">
+            <div class="media-contain">
+              <i data="linkedIn" class="fab fa-linkedin-in"></i>
+            </div>
+            <div class="media-desc">
+              <p>LinkedIn</p>
+              <a target="_blank" [href]="user.media.linkedIn">{{
+                user.media.linkedIn
+              }}</a>
+            </div>
+          </div>
+
+          <!-- Lines -->
+          <div data="line-first" class="line-media"></div>
+          <div data="line-second" class="line-media"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div class="my-history" #history>
+      <!-- Nav Panel -->
+      <nav>
+        <div (click)="onSelectHistory(0)">
+          <p [class.active-history]="selected === 0">Logowania</p>
+        </div>
+        <div (click)="onSelectHistory(1)">
+          <p [class.active-history]="selected === 1">Produkty</p>
+        </div>
+        <div (click)="onSelectHistory(2)">
+          <p [class.active-history]="selected === 2">Zamówienia</p>
+        </div>
+        <div (click)="onSelectHistory(3)">
+          <p [class.active-history]="selected === 3">Szukaj</p>
+        </div>
+      </nav>
+
+      <!-- List History -->
+      <div class="list-history">
+        <div
+          class="history-detail"
+          *ngFor="let history of dataHistory; let i = index"
+        >
+          <ng-container *ngIf="i <= nextDay">
+            <!-- Date -->
+            <p class="history-data">{{ history.date | date : "yyyy-MM-dd" }}</p>
+
+            <!-- Details -->
+            <div
+              class="history-overview"
+              *ngFor="let data of history.data; let j = index"
+              [class.overview-outside-start]="j === 0"
+              [class.overview-outside-end]="j === history.data.length - 1"
+            >
+              <!-- Line -->
+              <div
+                class="line-history"
+                *ngIf="j < history.data.length - 1 && history.data.length > 1"
+              ></div>
+
+              <!-- Logins -->
+              <p class="history-name" *ngIf="selected === 0">
+                Logowanie użytkownika na stronie
+              </p>
+
+              <!-- Add Products -->
+              <p class="history-name" *ngIf="selected === 1">
+                Dodanie produktu na stronie
+              </p>
+
+              <!-- Execute Orders -->
+              <p class="history-name" *ngIf="selected === 2">
+                Wykonanie zamówienia na stronie
+              </p>
+
+              <!-- Kind -->
+              <div class="history-kind" *ngIf="selected === 0">
+                {{ data.ip }}
+              </div>
+
+              <div
+                class="history-kind"
+                *ngIf="selected === 1 || selected === 2"
+              >
+                {{ data.ref }}
+              </div>
+
+              <p class="history-time">Godzina: {{ data.time }}</p>
+            </div>
+
+            <!-- Next Date -->
+            <div
+              class="title-section-global"
+              *ngIf="i === nextDay && dataHistory.length - 1 > nextDay"
+            >
+              <button class="show-more-global" (click)="nextDay = nextDay + 1">
+                <i class="fas fa-arrow-down"></i>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Empty Data -->
+        <div *ngIf="dataHistory.length === 0 && selected < 3">
+          <p class="history-data">Brak danych</p>
+          <div class="history-overview">
+            <p class="history-name">Brak Danych do wyświetlenia</p>
+          </div>
+        </div>
+
+        <div class="advanced-history" *ngIf="selected === 3">
+          <!-- Title -->
+          <h4 *ngIf="!showRecords">Szukanie Zaawansowane</h4>
+
+          <form
+            autocomplete="off"
+            [formGroup]="form"
+            (submit)="search()"
+            *ngIf="!showRecords"
+          >
+            <!-- Input Search Date -->
+            <div>
+              <label for="ip-login" basic-form>
+                Data:
+                <span icon-form>
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </label>
+              <input
+                id="ip-login"
+                basic-form
+                placeholder="Data"
+                readonly
+                [value]="
+                  form.value.from + (form.value.to ? ' - ' + form.value.to : '')
+                "
+                (click)="toggleCalendar($event)"
+              />
+              <app-datepicker-range
+                *ngIf="calendarVissible"
+                (clearCalendar)="clearCalendar()"
+                (toggleCalendar)="toggleCalendar($event)"
+                (setDate)="setDate($event[0], $event[1])"
+                [curDateFrom]="dateFrom"
+                [curDateTo]="dateTo"
+              >
+              </app-datepicker-range>
+            </div>
+
+            <!-- Input Multiple -->
+            <div>
+              <label for="options" basic-form>Opcje Szukania:</label>
+              <app-multiple [list]="listMultiple" id="options"></app-multiple>
+            </div>
+
+            <!-- Input Excluded IP -->
+            <div *ngIf="listMultiple[0].selected">
+              <label for="ip-login" basic-form>
+                Wykluczone IP:
+                <span small-text-form>(Logowania)</span>
+              </label>
+              <input
+                id="ip-login"
+                basic-form
+                placeholder="Wykluczone IP"
+                formControlName="excludeIp"
+              />
+            </div>
+
+            <!-- Input Search Ref Products -->
+            <div *ngIf="listMultiple[1].selected">
+              <label for="ip-login" basic-form>
+                Numer produktu:
+                <span small-text-form>(Produkty)</span>
+              </label>
+              <input
+                id="ip-login"
+                basic-form
+                placeholder="Numer referencyjny"
+                formControlName="refProduct"
+              />
+            </div>
+
+            <!-- Input Search Ref Products -->
+            <div *ngIf="listMultiple[2].selected">
+              <label for="ip-login" basic-form>
+                Numer zamówienia:
+                <span small-text-form>(Zamówienia)</span>
+              </label>
+              <input
+                id="ip-login"
+                basic-form
+                placeholder="Numer referencyjny"
+                formControlName="refOrder"
+              />
+            </div>
+
+            <!-- Input Search Time -->
+            <div>
+              <label for="ip-login" basic-form>Godzina:</label>
+              <input
+                id="ip-login"
+                basic-form
+                placeholder="00:00:00"
+                formControlName="time"
+              />
+            </div>
+
+            <!-- Submit Form -->
+            <div>
+              <button type="submit" secondary-form>Szukaj</button>
+              <button
+                [style.margin-left]="'10px'"
+                type="button"
+                (click)="showMeIp()"
+                primary-form
+              >
+                Moje IP
+              </button>
+            </div>
+          </form>
+
+          <div class="records" *ngIf="showRecords">
+            <!-- Return To Form -->
+            <h4 (click)="showRecords = false">
+              <i class="fas fa-undo-alt"></i>
+              Powrót
+            </h4>
+
+            <!-- Filter History -->
+            <div
+              class="history-detail"
+              *ngFor="let rec of records; let i = index"
+            >
+              <!-- Date -->
+              <p class="history-data filter-name" *ngIf="rec.data.length > 0">
+                {{ rec.name }}
+              </p>
+
+              <!-- Details -->
+              <div
+                class="history-overview"
+                *ngFor="let data of rec.data; let j = index"
+                [class.overview-outside-start]="j === 0"
+                [class.overview-outside-end]="j === rec.data.length - 1"
+              >
+                <!-- Line -->
+                <div
+                  class="line-history"
+                  *ngIf="j < rec.data.length - 1 && rec.data.length > 1"
+                ></div>
+
+                <!-- Data -->
+                <p class="history-name">
+                  {{ data.data }}
+                </p>
+
+                <!-- Kind -->
+                <div class="history-kind" *ngIf="rec.dataKey === 'ip'">
+                  {{ data.ip }}
+                </div>
+
+                <div class="history-kind" *ngIf="rec.dataKey === 'ref'">
+                  {{ data.ref }}
+                </div>
+
+                <p class="history-time">Godzina: {{ data.time }}</p>
+              </div>
+            </div>
+
+            <!-- Empty Data -->
+            <div *ngIf="records.length === 0">
+              <p class="history-data">Brak danych</p>
+              <div class="history-overview">
+                <p class="history-name">Brak Danych do wyświetlenia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

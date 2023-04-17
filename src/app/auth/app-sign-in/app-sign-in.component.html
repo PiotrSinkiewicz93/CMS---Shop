@@ -1,0 +1,117 @@
+<div class="card-sign-in">
+  <div class="form-sign-in">
+    <!-- Link TO SIGN UP -->
+    <div class="contain-link-register">
+      <span style="opacity: 0.7"> Potrzebujesz konta? </span>
+      <a routerLink="/auth/sign-up"> Zarejestruj </a>
+    </div>
+
+    <!-- Title -->
+    <div class="contain-title">
+      SHOP
+      <img class="title-image" src="./assets/images/home-welcome.png" />
+      ADMIN
+    </div>
+
+    <p class="text-center welcome-text">Witamy ponownie!</p>
+    <p class="text-center welcome-login-text">
+      Logowanie do panelu zarządzającego sklepem
+    </p>
+    <p class="text-center link-shop">
+      <a target="blank" href="https://www.w3schools.com">stoma.pl</a>
+    </p>
+    <div class="contain-control-login">
+      <!-- Form Login -->
+      <form
+        (ngSubmit)="submitLogin()"
+        [formGroup]="loginAccountForm"
+        novalidate="true"
+      >
+        <!-- Input Email -->
+        <div class="control-login">
+          <label for="login-email" basic-form>Email:</label>
+          <input
+            id="login-email"
+            basic-form
+            placeholder="Email"
+            formControlName="email"
+            valid-input
+          />
+
+          <!-- Alert Validate-->
+          <div class="text-danger" *ngIf="checkValidate('email', 'required')">
+            Pole nie może być puste!
+          </div>
+          <div class="text-danger" *ngIf="checkValidate('email', 'email')">
+            Zły format emaila!
+          </div>
+        </div>
+
+        <!-- Input Password -->
+        <div class="control-login">
+          <label for="login-password" basic-form>
+            Hasło:
+            <span
+              [style.border]="'unset'"
+              [style.background]="'none'"
+              icon-form
+            >
+              <i
+                class="fas fa-eye"
+                *ngIf="vissiblePassword"
+                (click)="setVisiblePassword(password)"
+              ></i>
+              <i
+                class="fas fa-eye-slash"
+                *ngIf="!vissiblePassword"
+                (click)="setVisiblePassword(password)"
+              ></i>
+            </span>
+          </label>
+          <input
+            #password
+            id="login-password"
+            type="password"
+            basic-form
+            placeholder="Hasło"
+            formControlName="password"
+            valid-input
+          />
+
+          <!-- Alert Validate-->
+          <div
+            class="text-danger"
+            *ngIf="checkValidate('password', 'required')"
+          >
+            Pole nie może być puste!
+          </div>
+        </div>
+
+        <!-- CheckBox Remember Me -->
+        <div class="control-users">
+          <input
+            color="primary"
+            (change)="savePassword = $event.checked"
+            type="checkbox"
+          />
+          Zapamiętaj mnie
+          <a class="remember-password" routerLink="/auth/reset-password">
+            Zapomniałeś Hasła?
+          </a>
+        </div>
+
+        <!-- Submit -->
+        <div class="submit-login">
+          <button info-form type="submit" [style.width]="'150px'">
+            Zaloguj
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Card Picture Right Section -->
+<div class="card-announcement">
+  <app-logo-background></app-logo-background>
+</div>

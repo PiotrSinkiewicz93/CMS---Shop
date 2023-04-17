@@ -1,0 +1,182 @@
+<div>
+  <section class="title-section-global">Lista Produktów</section>
+
+  <!-- Products -->
+  <main *ngIf="products && products.length > 0" class="list-products">
+    <!-- Card Products -->
+    <section class="card-products">
+      <!-- List Products -->
+      <section>
+        <!-- Nav List -->
+        <nav class="desc-list">
+          <h5>Produkty</h5>
+          <span (click)="showAll()">Pokaż Wszystkie</span>
+        </nav>
+
+        <table>
+          <!-- Header List -->
+          <thead>
+            <tr [formGroup]="filter" class="list-header">
+              <!-- Number List -->
+              <th [style.padding-left]="'30px'">No.</th>
+
+              <!-- Filter Name -->
+              <th>
+                <input
+                  basic-form
+                  placeholder="Nazwa"
+                  formControlName="name"
+                  (input)="filterData()"
+                />
+              </th>
+
+              <!-- Filter Price -->
+              <th>
+                <div class="sort-price" (click)="setSortState()">
+                  Cena
+                  <i
+                    class="fas fa-arrow-down"
+                    *ngIf="sortState > 0"
+                    [style.transform]="
+                      sortState === 2 ? 'rotate(180deg)' : 'unset'
+                    "
+                  ></i>
+                </div>
+              </th>
+
+              <!-- Filter CategoryName -->
+              <th>
+                <input
+                  basic-form
+                  placeholder="Nazwa Kategorii"
+                  formControlName="categoryName"
+                  (input)="filterData()"
+                />
+              </th>
+
+              <!-- Filter Reference Product -->
+              <th>
+                <input
+                  basic-form
+                  placeholder="Numer referencyjny"
+                  formControlName="ref"
+                  (input)="filterData()"
+                />
+              </th>
+
+              <!-- Filter Date -->
+              <th>
+                <input
+                  basic-form
+                  placeholder="Data dodania"
+                  formControlName="date"
+                  (input)="filterData()"
+                />
+              </th>
+
+              <!-- Edit -->
+              <th>Edytuj</th>
+
+              <!-- Details -->
+              <th>Szczegóły</th>
+
+              <!-- Delete -->
+              <th>Usuń</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              class="list-body"
+              *ngFor="let product of cpProducts.slice(0, limit); let i = index"
+            >
+              <!-- No -->
+              <th>
+                <p>{{ i + 1 }}</p>
+              </th>
+
+              <!-- Basic -->
+              <th>
+                <div class="basic-info">
+                  <div>
+                    <img [src]="product.image.url" />
+                  </div>
+                  <p>
+                    {{
+                      product.name.length > 20
+                        ? product.name.substr(0, 20) + "..."
+                        : product.name
+                    }}
+                  </p>
+                </div>
+              </th>
+
+              <!-- Price -->
+              <th>
+                <p>{{ product.price }}</p>
+              </th>
+
+              <!-- Category Name -->
+              <th>
+                <p>{{ product.categoryName }}</p>
+              </th>
+
+              <!-- Reference Product -->
+              <th>
+                <p>{{ product.ref }}</p>
+              </th>
+
+              <!-- Date -->
+              <th>
+                <p class="address">
+                  {{ product.date }}
+                </p>
+              </th>
+
+              <!-- Edit -->
+              <th>
+                <a
+                  [routerLink]="'/add-product/' + product.ref"
+                  class="fas fa-edit edit-product"
+                ></a>
+              </th>
+
+              <!-- Details -->
+              <th>
+                <a
+                  [routerLink]="'/details-product/' + product.ref"
+                  class="fas fa-eye show-detail-product"
+                ></a>
+              </th>
+
+              <!-- Delete -->
+              <th>
+                <i
+                  (click)="deleteProduct(product.ref)"
+                  class="far fa-trash-alt delete-product"
+                ></i>
+              </th>
+            </tr>
+          </tbody>
+
+          <!-- Next Five Products -->
+          <div
+            class="title-section-global"
+            [style.margin-bottom]="'25px'"
+            *ngIf="cpProducts.length > limit"
+          >
+            <button class="show-more-global" (click)="setLimit()">
+              <i class="fas fa-arrow-down"></i>
+            </button>
+          </div>
+        </table>
+      </section>
+    </section>
+  </main>
+
+  <!-- Empty List Products -->
+  <section *ngIf="products && products.length === 0" class="empty-list">
+    <i class="fas fa-cart-arrow-down"></i>
+    <h4 [style.margin-top]="'10px'">Brak Produktów</h4>
+  </section>
+</div>

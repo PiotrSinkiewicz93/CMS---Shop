@@ -1,0 +1,152 @@
+<section class="message-contain">
+  <!-- List Message -->
+  <section class="list-messages">
+    <!-- Filter New Messages -->
+    <nav>
+      <label for="messages" basic-form>
+        <span
+          [style.top]="'5px'"
+          [style.border]="'none'"
+          [style.background]="'unset'"
+          icon-form
+          class="password-input"
+        >
+          <i class="fas fa-search"></i>
+        </span>
+      </label>
+      <input
+        (input)="filterData($event)"
+        id="messages"
+        basic-form
+        placeholder="E-mail / Data"
+      />
+    </nav>
+
+    <!-- Title -->
+    <p class="title-message">Najnowsze nieprzeczytane wiadomości od klientów</p>
+
+    <!-- List Messages -->
+    <main class="messages" *ngIf="messages">
+      <div *ngIf="messages && messages.length > 0; else noMessage">
+        <div
+          (click)="select(message.id, i + 1)"
+          class="message"
+          *ngFor="let message of cpMessages.slice(0, limit); let i = index"
+        >
+          <div class="basic-info" [class.active]="selectValue === i + 1">
+            <span class="date">{{
+              getDaysCreated(message.date)
+                ? getDaysCreated(message.date) + " dni temu"
+                : "Dzisiaj"
+            }}</span>
+            <img [src]="message.url" />
+            <div>
+              <p>
+                {{ message.name + " " + message.surname }}
+              </p>
+              <p>{{ message.email }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noMessage>
+        <div class="no-messages">
+          <i class="fas fa-envelope"></i>
+          <p>Brak nowych wiadomości</p>
+        </div>
+      </ng-template>
+
+      <!-- Next Five Messages -->
+      <div
+        class="title-section-global"
+        [style.margin-bottom]="'25px'"
+        *ngIf="cpMessages.length > limit"
+      >
+        <button class="show-more-global" (click)="setLimit()">
+          <i class="fas fa-arrow-down"></i>
+        </button>
+      </div>
+    </main>
+  </section>
+
+  <!-- Edit Message -->
+  <section class="edit-message">
+    <!-- Nav Panel -->
+    <nav *ngIf="targetMsg">
+      <p class="user-basic-data">
+        {{ targetMsg.name + " " + targetMsg.surname }}
+      </p>
+      <div class="options">
+        <button class="send-default-message" (click)="sendDefaultMessage()">
+          <i class="far fa-paper-plane"></i>
+        </button>
+        <button class="delete" (click)="deleteMessage()">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+        <button class="mark-read" (click)="markMessage()">
+          <i class="fas fa-hashtag"></i>
+        </button>
+        <span class="current-message"
+          >{{ selectValue }} z {{ cpMessages.length }}</span
+        >
+        <button
+          (click)="prevSelect()"
+          [style.opacity]="selectValue === 1 ? '0.5' : '1'"
+          class="prev-message"
+        >
+          <i class="fas fa-caret-left"></i>
+        </button>
+        <button
+          (click)="nextSelect()"
+          [style.opacity]="selectValue < cpMessages.length ? '1' : '0.5'"
+          class="next-message"
+        >
+          <i class="fas fa-caret-right"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Contain Message -->
+    <main *ngIf="targetMsg" class="contain-message">
+      <!-- Question Customer -->
+      <div class="customer-question">
+        <img [src]="targetMsg.url" />
+        <div>
+          <p>
+            {{ targetMsg.name + " " + targetMsg.surname }}
+            <span>{{
+              getDaysCreated(targetMsg.date)
+                ? getDaysCreated(targetMsg.date) + " dni temu"
+                : "Dzisiaj"
+            }}</span>
+          </p>
+          <p>{{ targetMsg.desc }}</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Input Message -->
+    <div *ngIf="targetMsg" class="input-message">
+      <form
+        autocomplete="off"
+        [formGroup]="messageForm"
+        (ngSubmit)="submitMessage()"
+        novalidate="true"
+      >
+        <label for="input-message" basic-form>
+          <span (click)="submitMessage()" [style.top]="'0px'" icon-form>
+            <i class="far fa-paper-plane"></i>
+          </span>
+        </label>
+        <input
+          id="input-message"
+          basic-form
+          placeholder="E-mail/Data"
+          formControlName="message"
+        />
+        <button [style.display]="'none'" type="submit"></button>
+      </form>
+    </div>
+  </section>
+</section>

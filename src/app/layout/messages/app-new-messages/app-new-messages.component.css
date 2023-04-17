@@ -1,0 +1,323 @@
+/*================
+  GLOBAL STYLES
+
+  1. CARDS SETTINGS
+  2. LIST MESSAGE
+  3. EDIT MESSAGE
+  4. CONTAIN MESSAGE
+
+  AUTHOR: MARCIN PIERZYNOWSKI
+  ================*/
+
+/*======================
+    1. CARDS SETTINGS
+======================*/
+
+.message-contain {
+  min-height: calc(100vh - 121px);
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr;
+  font-family: Source Sans Pro, sans-serif;
+}
+
+@media screen and (min-width: 992px) {
+  .message-contain {
+    grid-template-columns: 40% 60%;
+  }
+}
+
+/*======================
+    2. LIST MESSAGE
+======================*/
+
+.list-messages {
+  border-right: 1px solid #e6eaee;
+}
+
+.list-messages nav {
+  padding: 15px;
+  height: 76px;
+  border-bottom: 1px solid #e6eaee;
+}
+
+.title-message {
+  color: #354052;
+  padding: 15px;
+  margin: 0;
+  border-bottom: 1px solid #e6eaee;
+  font-size: 14px;
+  height: 70px;
+  max-height: 70px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.messages {
+  max-height: calc(100vh - 146px - 121px);
+  overflow-y: overlay;
+}
+
+.messages::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+.messages::-webkit-scrollbar {
+  width: 5px;
+  background-color: #ffffff;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background-color: rgba(114, 115, 118);
+  border: 2px solid rgba(114, 115, 118);
+  border-radius: 2.5px;
+}
+
+.message {
+  padding: 15px 20px 15px 30px;
+  transition: 0.25s ease-in;
+}
+
+.message:hover {
+  cursor: pointer;
+  background-color: #ececec;
+}
+
+.basic-info {
+  height: 50px;
+  display: flex;
+  position: relative;
+}
+
+.basic-info .date {
+  position: absolute;
+  right: 0;
+  font-size: 14px;
+  color: #7f8fa4;
+}
+
+.basic-info img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.basic-info div {
+  margin-left: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.basic-info p {
+  margin: 0;
+  text-overflow: ellipsis;
+}
+
+.basic-info div p:first-child {
+  color: #354052;
+  font-size: 14px;
+}
+
+.basic-info div p:last-child {
+  color: #7f8fa4;
+  font-size: 12px;
+}
+
+.basic-info.active::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: -15px;
+  background-color: #53b2f9;
+  width: 3px;
+  height: calc(100% + 30px);
+}
+
+.no-messages {
+  color: #7f8fa4;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 50px;
+}
+
+.no-messages i {
+  font-size: 35px;
+}
+
+.no-messages p {
+  font-size: 20px;
+}
+
+/*===================
+  3. EDIT MESSAGE
+===================*/
+
+.edit-message {
+  position: relative;
+}
+
+.edit-message nav {
+  padding: 15px;
+  border-bottom: 1px solid #e6eaee;
+  border-top: 1px solid #e6eaee;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  overflow: hidden;
+}
+
+.user-basic-data {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #354052;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.options button {
+  background: linear-gradient(180deg, #fff, #f2f4f7);
+  border: 1px solid #dfe3e9;
+  color: #717171;
+  padding: 8px 10px;
+  margin: 0 5px;
+}
+
+.options button:hover {
+  cursor: pointer;
+}
+
+.options button:focus {
+  outline: none;
+}
+
+.send-default-message,
+.delete {
+  margin-right: -1px;
+}
+
+.send-default-message,
+.prev-message {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.mark-read,
+.next-message {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.current-message {
+  color: #7f8fa4;
+  font-size: 14px;
+}
+
+.contain-message {
+  max-height: calc(100vh - 146px - 121px);
+  margin-bottom: 70px;
+  overflow-y: overlay;
+}
+
+.contain-message::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+.contain-message::-webkit-scrollbar {
+  width: 5px;
+  background-color: #ffffff;
+}
+
+.contain-message::-webkit-scrollbar-thumb {
+  background-color: rgba(114, 115, 118);
+  border: 2px solid rgba(114, 115, 118);
+  border-radius: 2.5px;
+}
+
+@media screen and (min-width: 576px) {
+  .options button {
+    padding: 8px 20px;
+    margin: 0;
+  }
+
+  .options .mark-read {
+    margin-right: 20px;
+  }
+  
+  .options .prev-message {
+    margin-left: 5px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .edit-message nav {
+    border-top: 0;
+    grid-template-columns: 30% 70%;
+    height: 76px;
+  }
+
+  .user-basic-data {
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .options {
+    justify-content: flex-end;
+  }
+}
+
+/*==========================
+  4. CONTAIN MESSAGE
+===========================*/
+
+.contain-message {
+  padding: 15px;
+}
+
+.customer-question {
+  display: flex;
+}
+
+.customer-question img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.customer-question p {
+  color: #354052;
+  font-size: 16px;
+}
+
+.customer-question p span {
+  color: #7f8fa4;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.input-message {
+  position: absolute;
+  height: 70px;
+  width: calc(100% - 30px);
+  padding: 15px;
+  bottom: 0;
+  border-top: 1px solid #dfe3e9;
+}
+
+.input-message label {
+  margin: 0;
+}
